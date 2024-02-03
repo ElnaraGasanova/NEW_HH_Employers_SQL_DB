@@ -8,7 +8,7 @@ PG_KEY: str = os.getenv('POSTGRESSQL_KEY')
 
 def main():
     """Код для проверки работоспособности программы"""
-    # Создаем список id компаний с НН
+    #Создаем список id компаний с НН
     employer_ids = [4649269, 2733062, 15478, 42481, 907345, 4934, 2624085, 1373, 23427, 4023]
     data_all = []
     emp_list = get_employers_data(employer_ids)
@@ -24,6 +24,7 @@ def main():
     print("Приветствую! Предлагаю ознакомиться с вакансиями ведущих работодателей Москвы!\n")
 
     db_manager = DBManager()
+    db_manager.connect()
 
     while True:
 
@@ -38,6 +39,7 @@ def main():
         )
 
         if task == 'стоп':
+            db_manager.disconnect()
             break
         elif task == '1':
             print(db_manager.get_companies_and_vacancies_count())
